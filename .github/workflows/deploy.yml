@@ -31,7 +31,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Generate static site
-        run: python generate_static.py
+        run: |
+          python generate_static.py
+          echo "=== Build directory contents ==="
+          ls -la build/
+          echo "=== Checking for index.html ==="
+          test -f build/index.html && echo "index.html exists" || echo "ERROR: index.html not found"
 
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v1
