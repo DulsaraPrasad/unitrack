@@ -80,68 +80,81 @@ unitrack/
     └── medical_reports/            # Uploaded medical documents
 ```
 
-## 📡 GitHub Pages Deployment
+## 🚀 Heroku Deployment
 
-- **Note:** GitHub Pages only serves static sites. This repository contains a Flask app (server-side logic, database, sessions, and file uploads) which cannot run on GitHub Pages. The provided workflow will export a small set of public pages (login, forgot password, and the root) to static HTML and deploy them to GitHub Pages.
-- **Limitations:** Dynamic features (authentication, database reads/writes, file uploads, admin actions) will NOT work on GitHub Pages because they require a running Flask server.
+Deploy UniTrack to Heroku with a few simple steps. The app uses SQLite for the database, which persists in Heroku's ephemeral filesystem (files are reset on dyno restart, but for persistent data consider adding PostgreSQL).
 
-### How it works
-- A script `generate_static.py` uses Flask's test client to fetch a few public routes and write them to `build/` as static HTML.
-- A GitHub Actions workflow (`.github/workflows/deploy.yml`) runs on each push to `main`, generates the static files and deploys them to GitHub Pages.
+### Prerequisites
+- A Heroku account (free tier available)
+- Git installed locally
+- Heroku CLI installed: https://devcenter.heroku.com/articles/heroku-cli
 
-### How to enable
-1. Push this repository to GitHub (if not already pushed).
-2. On GitHub, go to the repository Settings → Pages (or the Pages sidebar) and ensure the site is set to use GitHub Pages from the GitHub Actions deployment (this is automatic once the workflow runs successfully).
-3. Push to `main` to trigger the workflow. After the workflow succeeds, your static site will be published by GitHub Pages.
+### Deployment Steps
 
-### To host the full dynamic app instead
-- Deploy the Flask app to a service that supports Python apps (e.g., Render.com, Railway, Fly, or a VPS). Then either:
-   - Use your service URL directly, or
-   - Host only static frontend on GitHub Pages and point client requests to your deployed backend.
+1. **Login to Heroku**
+   ```bash
+   heroku login
+   ```
 
-If you'd like, I can:
-- Configure a more complete static export (freeze more routes and add URL generators), or
-- Add a deployment config to host the full Flask app on a platform like Render or Railway.
+2. **Create a Heroku app**
+   ```bash
+   heroku create your-app-name
+   ```
+   Replace `your-app-name` with a unique name (e.g., `unitrack-demo-2024`).
 
-## 🖥️ Desktop App (Local wrapper)
+3. **Deploy the app**
+   ```bash
+   git push heroku main
+   ```
+   This will automatically:
+   - Install dependencies from `requirements.txt`
+   - Run `Procfile` to start the app with Gunicorn
+   - Use the Python version specified in `runtime.txt`
 
-You can run UniTrack as a simple desktop application. The approach provided here runs the Flask app locally and opens it inside a native window using `pywebview`. This gives a desktop-like experience while the Flask server runs in the background on the local machine.
+4. **Initialize the database**
+   ```bash
+   heroku run python -c "from app import app, create_dummy_data; create_dummy_data()" --app your-app-name
+   ```
+   This creates the SQLite database and adds dummy test data.
 
-### How to run locally as a desktop app
-1. Install dependencies:
+5. **Open the app**
+   ```bash
+   heroku open --app your-app-name
+   ```
+   Or visit: `https://your-app-name.herokuapp.com`
+
+### Important Notes
+
+- **Database**: The current setup uses SQLite, which resets when the dyno restarts (typically daily). For persistent data, add PostgreSQL:
+  ```bash
+  heroku addons:create heroku-postgresql:hobby-dev --app your-app-name
+  ```
+  Then update `app.py` to use the `DATABASE_URL` environment variable.
+
+- **File Uploads**: Medical reports are uploaded to the `uploads/` directory. On Heroku, these files are ephemeral and will be lost on dyno restart. For production, consider using AWS S3, Google Cloud Storage, or another cloud storage service.
+
+- **Environment Variables**: Set a strong `SECRET_KEY` for production:
+  ```bash
+  heroku config:set SECRET_KEY="your-very-secret-key-here" --app your-app-name
+  ```
+
+### View Logs
 ```bash
-pip install -r requirements.txt
+heroku logs --app your-app-name --tail
 ```
-2. Run the desktop launcher:
+
+### Database Management (on Heroku)
 ```bash
-python desktop.py
+heroku run python -c "from app import app, db; db.create_all()" --app your-app-name
 ```
-This will:
-- Initialize the local SQLite DB (if empty)
-- Start the Flask server on `http://127.0.0.1:5000`
-- Open a native window (if `pywebview` is available and a display is present) or your default browser.
 
-### Packaging as a single executable
-You can bundle the app into a single executable using `PyInstaller`.
-
-1. Install `pyinstaller`:
-```bash
-pip install pyinstaller
-```
-2. Build the executable (example for Linux/macOS/Windows):
-```bash
-pyinstaller --onefile --add-data "templates:templates" --add-data "static:static" --add-data "instance:instance" desktop.py
-```
-- On Windows, replace colons in `--add-data` with semicolons: `templates;templates`.
-- The produced executable will be in `dist/desktop`.
-
-Notes:
-- The packaged app will still run a local Flask server and open a window. The database remains local (SQLite in `instance/database.db`).
-- `pywebview` requires additional system libraries for GUI backends on some platforms (GTK/Qt on Linux). If those aren't available, the launcher falls back to opening the default browser.
-
-If you want, I can:
-- Add a `pyinstaller` spec file and a GitHub Action to produce releases, or
-- Switch the launcher to use `waitress` as the WSGI server for better production behaviour inside the bundle.
+### Production Checklist
+- [ ] Set `SECRET_KEY` environment variable
+- [ ] Consider adding PostgreSQL for persistence
+- [ ] Configure cloud storage for file uploads
+- [ ] Set `debug=False` in production (already set in Procfile)
+- [ ] Review security headers and CORS settings
+- [ ] Monitor app logs regularly
 
 ## 🗄️ Database Models
 
