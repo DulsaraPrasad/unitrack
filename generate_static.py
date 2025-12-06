@@ -50,6 +50,12 @@ def main():
             save_response(path, resp.data)
         else:
             print(f'Warning: {path} returned status {resp.status_code}')
+    
+    # Create .nojekyll to ensure GitHub Pages serves the site correctly
+    nojekyll_path = os.path.join(OUTPUT_DIR, '.nojekyll')
+    with open(nojekyll_path, 'w') as f:
+        f.write('')
+    print(f'Wrote {nojekyll_path}')
 
 
 if __name__ == '__main__':
