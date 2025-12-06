@@ -6,9 +6,15 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'university_secret_key_123'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'university_secret_key_123')
+
+# Use DATABASE_URL (set by Render/Heroku) in production, fallback to local SQLite
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Fix connection string for SQLAlchemy 3.x if using Render/Heroku (postgres:// -> postgresql://)
+if isinstance(app.config['SQLALCHEMY_DATABASE_URI'], str) and app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgres://'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace('postgres://', 'postgresql://', 1)
 app.config['UPLOAD_FOLDER'] = 'uploads/medical_reports'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'}
@@ -566,5 +572,6 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    create_dummy_data() # Run once to set up DB
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # This block only runs during local development
+    create_dummy_data()  # Initialize SQLite for local testing
+    app.run(debug=True)
