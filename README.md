@@ -80,6 +80,43 @@ unitrack/
     └── medical_reports/            # Uploaded medical documents
 ```
 
+## 🌐 GitHub Pages (Static Documentation Site)
+
+UniTrack includes a beautiful static landing page hosted on GitHub Pages. The page showcases the project features, installation instructions, and links to the repository.
+
+### Automatic Deployment
+
+The repository includes a GitHub Actions workflow that automatically deploys the `docs/` folder to GitHub Pages on every push to the `main` branch.
+
+### Enabling GitHub Pages
+
+1. **Go to your repository settings** on GitHub
+2. Navigate to **Settings → Pages**
+3. Under **Source**, select:
+   - **Source**: Deploy from a branch
+   - **Branch**: `main`
+   - **Folder**: `/docs`
+4. Click **Save**
+
+Alternatively, the repository uses **GitHub Actions** for deployment:
+- **Source**: GitHub Actions (recommended)
+- The workflow file is located at `.github/workflows/github-pages.yml`
+
+### Access Your GitHub Pages Site
+
+Once enabled, your site will be available at:
+```
+https://DulsaraPrasad.github.io/unitrack/
+```
+
+Replace `DulsaraPrasad` with your GitHub username if you've forked the repository.
+
+### Note
+
+GitHub Pages hosts the **static landing page** only. The actual Flask application (with database, authentication, file uploads) must be deployed to a platform like Render or Heroku (see sections below).
+
+---
+
 ## 🚀 Heroku Deployment
 
 Deploy UniTrack to Heroku with a few simple steps. The app uses SQLite for the database, which persists in Heroku's ephemeral filesystem (files are reset on dyno restart, but for persistent data consider adding PostgreSQL).
