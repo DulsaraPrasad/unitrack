@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTrack - University Attendance Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .hero-section {
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        .cta-button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom {
+            background: #667eea;
+            border: none;
+            color: white;
+        }
+        .btn-primary-custom:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+        .btn-secondary-custom {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+        }
+        .btn-secondary-custom:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+        .info-section {
+            background: white;
+            padding: 60px 0;
+        }
+        .tech-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .github-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .github-link:hover {
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">🎓 UniTrack</h1>
+            <p class="hero-subtitle">University Attendance Management System</p>
+            <p class="lead mb-5">A comprehensive web-based solution for tracking student attendance, managing medical absences, and generating detailed reports.</p>
+            
+            <div class="mt-5">
+                <a href="https://github.com/DulsaraPrasad/unitrack" class="btn btn-primary-custom cta-button" target="_blank">
+                    📦 View on GitHub
+                </a>
+                <a href="#features" class="btn btn-secondary-custom cta-button">
+                    ✨ Learn More
+                </a>
+            </div>
+            
+            <div class="mt-4">
+                <a href="https://github.com/DulsaraPrasad/unitrack" class="github-link" target="_blank">
+                    ⭐ Star us on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="info-section" id="features">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color: #667eea; font-weight: bold;">Key Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">🔐</div>
+                        <h4>Role-Based Access</h4>
+                        <p>Administrator, Admin/Lecturer, and Student roles with specific permissions for each user type.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">📊</div>
+                        <h4>Attendance Tracking</h4>
+                        <p>Mark attendance individually, in bulk by subject, or import via CSV files. View complete history with filters.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">🏥</div>
+                        <h4>Medical Reports</h4>
+                        <p>Students can upload medical documents for absences. Admins review and approve/reject submissions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">📈</div>
+                        <h4>Analytics Dashboard</h4>
+                        <p>Monthly attendance statistics with color-coded indicators and percentage calculations.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">📤</div>
+                        <h4>Data Export</h4>
+                        <p>Export attendance records as CSV files for further analysis and reporting.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">👥</div>
+                        <h4>User Management</h4>
+                        <p>Administrators can add/remove users, manage roles, and control system access.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="hero-section" style="padding: 60px 0;">
+        <div class="container">
+            <h2 class="mb-4">🛠️ Technology Stack</h2>
+            <div class="mt-4">
+                <span class="tech-badge">Flask 3.0.0</span>
+                <span class="tech-badge">SQLAlchemy</span>
+                <span class="tech-badge">Bootstrap 5</span>
+                <span class="tech-badge">Python 3.x</span>
+                <span class="tech-badge">SQLite/PostgreSQL</span>
+                <span class="tech-badge">Werkzeug Security</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="info-section">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color: #667eea; font-weight: bold;">🚀 Getting Started</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h4>📥 Installation</h4>
+                        <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>git clone https://github.com/DulsaraPrasad/unitrack.git
+cd unitrack
+pip install -r requirements.txt
+python app.py</code></pre>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h4>🔑 Demo Credentials</h4>
+                        <table class="table">
+                            <tr>
+                                <td><strong>Administrator:</strong></td>
+                                <td>Dulsara / Dulsara</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Admin:</strong></td>
+                                <td>dulsara / 4321</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Student:</strong></td>
+                                <td>S1001 / 1234</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="feature-card">
+                        <h4>☁️ Deployment Options</h4>
+                        <p>UniTrack can be deployed to various platforms:</p>
+                        <ul>
+                            <li><strong>Render:</strong> Automated deployment via GitHub Actions</li>
+                            <li><strong>Heroku:</strong> Docker-based deployment with PostgreSQL</li>
+                            <li><strong>Local:</strong> SQLite database for development and testing</li>
+                        </ul>
+                        <p class="mb-0">Check the <a href="https://github.com/DulsaraPrasad/unitrack/blob/main/README.md" target="_blank">README.md</a> for detailed deployment instructions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="hero-section" style="padding: 60px 0;">
+        <div class="container">
+            <h2 class="mb-4">💡 Use Cases</h2>
+            <div class="row text-start">
+                <div class="col-md-4">
+                    <h5>👨‍🎓 For Students</h5>
+                    <ul>
+                        <li>View attendance records</li>
+                        <li>Track monthly statistics</li>
+                        <li>Upload medical reports</li>
+                        <li>Update profile information</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>👨‍🏫 For Lecturers/Admins</h5>
+                    <ul>
+                        <li>Mark attendance (individual/bulk)</li>
+                        <li>Import CSV attendance data</li>
+                        <li>Review medical submissions</li>
+                        <li>View attendance reports</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>👨‍💼 For Administrators</h5>
+                    <ul>
+                        <li>All admin features</li>
+                        <li>Manage users (add/remove)</li>
+                        <li>Export attendance data</li>
+                        <li>System configuration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="info-section" style="background: #f8f9fa; padding: 30px 0;">
+        <div class="container text-center">
+            <p class="mb-2" style="color: #666;">
+                <strong>UniTrack</strong> - Built with ❤️ for educational institutions
+            </p>
+            <p style="color: #999;">
+                <a href="https://github.com/DulsaraPrasad/unitrack" target="_blank" style="color: #667eea; text-decoration: none;">GitHub Repository</a>
+                 | 
+                <a href="https://github.com/DulsaraPrasad/unitrack/issues" target="_blank" style="color: #667eea; text-decoration: none;">Report Issues</a>
+                 | 
+                <a href="https://github.com/DulsaraPrasad/unitrack/blob/main/README.md" target="_blank" style="color: #667eea; text-decoration: none;">Documentation</a>
+            </p>
+            <p class="mt-3 mb-0" style="color: #999; font-size: 0.9rem;">
+                © 2025 DulsaraPrasad | Version 1.0.0
+            </p>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
