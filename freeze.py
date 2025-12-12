@@ -4,7 +4,7 @@ This script generates static HTML files from the Flask templates.
 Note: This creates a static snapshot - dynamic features won't work.
 """
 from flask_frozen import Freezer
-from app import app, db, User, Attendance, StudentCourse
+from app import app, db, User
 import os
 
 # Configure for freezing
@@ -15,8 +15,8 @@ app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
 freezer = Freezer(app)
 
 @freezer.register_generator
-def error_handlers():
-    """Generate error pages if needed."""
+def additional_routes():
+    """Register additional routes for freezing."""
     yield '/login', {}
 
 if __name__ == '__main__':
